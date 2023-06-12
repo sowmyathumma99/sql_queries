@@ -1,0 +1,67 @@
+Assignment 1 - Append 2 lists in python
+
+l1=["Sowmya","Saniya","Shruthi","Varsha"]
+l2=["Thumma","Shaik","Kampili","Mahshetty"]
+l3=[]
+for i in range(len(l1)):
+    l3.append(l1[i]+l2[i])
+print(l3)
+
+Assignment 2 - find pervious month, quarter, year
+
+def example(currdate,q):
+    n=len(currdate)
+    mm=int(currdate[n-2:])
+    y=int(currdate[:n-2])
+    if (mm<10):
+        if(mm!=1):
+            prev_date=currdate[:n-2]+"0"+str(mm-1)
+            future_date=str(y+1)+"0"+str(mm-1)
+        else:
+            prev_month=str(y-1)+"12"
+            future_date=str(y)+"12"
+    else:
+        prev_month=currdate[:n-2]+str(mm-1)
+        future_date=str(y+1)+str(mm-1)
+        
+    if (q==1):
+        prev_quater="Q"+str(q+3)+"_"+str(y-1)
+    else:
+        prev_quater="Q"+str(q-1)+"_"+str(y+1)
+#     future_date=str(y+1)+"0"+str(mm-1)
+    if (q==4):
+        
+        future_quater="Q"+str(q-3)+"_"+str(y+1)
+    else:
+        future_quater="Q"+str(q+1)+"_"+str(y)
+
+    dict1=dict({'prev_date':prev_month,'prev_quater':prev_quater,'future_date':future_date,'future_quater':future_quater})
+    return dict1
+def main():
+    curr_date=input()
+    quater=int(input())
+    print(example(curr_date,quater))
+if __name__ == "__main__":
+    main()
+
+
+Assignment 3 - Employee and Manager reporting
+
+SELECT DISTINCT e1.manager_id, e1.employee_id
+FROM Employees e1
+JOIN Employees e2 ON e1.manager_id = e2.employee_id
+JOIN Employees e3 ON e2.manager_id = e3.employee_id
+JOIN Employees e4 ON e3.manager_id = e4.employee_id
+WHERE e1.employee_id <> 1
+AND (e1.manager_id = 1 OR e2.manager_id = 1 OR e3.manager_id = 1 OR e4.manager_id = 1);
+
+Assignment 4 - Date difference between months
+
+SELECT *, DATEDIFF(MONTH, MIN(order_date) OVER (PARTITION BY cust_id), order_date) AS months_difference FROM cust
+
+Assignment 5 - Consecutive two week gap between Products
+
+Select p. product_id,p.product_name,p.product_category from product p where p.product_id NOT IN(select s.product_id from sales s where exists( select 1 from sales s1 where s.pro
+duct_id=s1.product_id and DATEDIFF(s1.T_date,s.T_date)=14));
+
+
